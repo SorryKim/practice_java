@@ -1,0 +1,72 @@
+// baekjoon_11723
+// https://www.acmicpc.net/problem/11723
+
+package practice;
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
+		int M = Integer.parseInt(br.readLine());
+		boolean[] array = new boolean[21];
+		String command;
+		int num;
+		for(int i = 0; i <= 20; i++) {
+			array[i] = false;
+		}
+		
+		for(int i = 0; i < M; i++) {
+			String s = br.readLine();
+			StringTokenizer st = new StringTokenizer(s, " ");
+			command = st.nextToken();
+			if(command.equals("add")) {
+				num = Integer.parseInt(st.nextToken());
+				array[num] = true;
+			}
+			
+			else if(command.equals("remove")) {
+				num = Integer.parseInt(st.nextToken());
+				array[num] = false;
+			}
+			
+			else if(command.equals("check")) {
+				num = Integer.parseInt(st.nextToken());
+				if(array[num] == true)
+					bw.write("1\n");
+				else
+					bw.write("0\n");
+			}
+			
+			else if(command.equals("toggle")) {
+				num = Integer.parseInt(st.nextToken());
+				if(array[num] == true) {
+					array[num] = false;
+				}
+				else {
+					array[num] = true;
+				}
+			}
+			
+			else if(command.equals("all")){
+				for(int j = 1; j <=20; j++) {
+					array[j] = true;
+				}
+			}
+			
+			else {
+				for(int j = 1; j <= 20; j++)
+					array[j] = false;
+			}
+		}
+		
+		bw.write(sb.toString());
+		bw.close();
+		br.close();
+
+	}
+}
