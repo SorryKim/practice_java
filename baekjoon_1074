@@ -1,0 +1,49 @@
+// baekjoon_1074
+// https://www.acmicpc.net/problem/1074
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int N = Integer.parseInt(st.nextToken());
+		int r = Integer.parseInt(st.nextToken());
+		int c = Integer.parseInt(st.nextToken());
+		int size = (int)Math.pow(2, N); // 2의 N승
+		
+		String s = Integer.toString(Z(size,r,c));
+		bw.write(s);
+		
+		bw.close();
+		br.close();
+		
+	}
+	
+	public static int Z(int size, int r, int c) {
+		int cnt = 0;
+		if(size == 1)
+			return 0;
+		// 제 2사분면
+		else if((r < size/2) && (c < size/2)) {
+			return cnt + Z(size/2, r ,c);
+		}
+		// 제 1사분면
+		else if((r < size/2) && (c >= size/2)) {
+			cnt += size*size / 4;
+			return cnt + Z(size/2, r, c - size/2);
+		}
+		// 제 3사분면
+		else if((r >= size/2) && (c < size/2)) {
+			cnt += size*size / 4 * 2;
+			return cnt  + Z(size/2, r - size/2, c);
+		}
+		else {
+			cnt += size*size / 4 * 3;
+			return cnt + Z(size/2, r - size/2, c - size/2);
+		}
+	}
+}
